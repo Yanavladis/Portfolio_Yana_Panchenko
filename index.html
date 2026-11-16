@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Яна Панченко — UX/UI дизайнер</title>
+  <meta name="description" content="UX/UI дизайнер: лендінги, редизайн сайтів та інтернет-магазини для бізнесу.">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap&subset=cyrillic" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="page">
+
+    <!-- Шапка -->
+    <header class="header" id="top">
+      <a class="logo" href="index.html" aria-label="Яна Панченко — на головну">
+        <svg class="logo__star" viewBox="0 0 47 49" fill="none" aria-hidden="true">
+          <path d="M22.4083 3.02777C23.5572 -1.54431 30.2877 -0.711646 30.2877 4.00255V17.3735L41.6537 14.2219C46.1189 12.9838 48.7644 19.0599 44.8159 21.485L33.2418 28.5936L39.8551 36.9808C42.6642 40.5435 38.3108 45.2914 34.5185 42.801L25.5612 36.9191L12.9035 47.5094C9.64706 50.234 4.9487 46.6769 6.68756 42.8034L13.0665 28.5936L1.40907 18.5164C-1.91139 15.646 1.14575 10.2966 5.30431 11.7004L19.0622 16.3447L22.4083 3.02777Z" fill="#C6A2DE"/>
+        </svg>
+        <span class="logo__text"><span data-i18n="logo.name">Яна Панченко</span><br><span data-i18n="logo.role">UX/UI дизайнер</span></span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Головне меню">
+        <a class="nav__link nav__link--dot" href="#cases" data-i18n="nav.works">Роботи</a>
+        <a class="nav__link" href="#services" data-i18n="nav.services">Послуги</a>
+        <a class="nav__link" href="#process" data-i18n="nav.process">Процес</a>
+        <a class="nav__link" href="pages/about.html" data-i18n="nav.about">Про мене</a>
+      </nav>
+
+      <div class="lang" role="group" aria-label="Мова / Language">
+        <button type="button" class="lang__btn" data-lang="en">EN</button>
+        <span aria-hidden="true">/</span>
+        <button type="button" class="lang__btn is-active" data-lang="uk">UA</button>
+      </div>
+
+      <a class="btn btn--order" href="#contact" data-i18n="nav.order">Замовити</a>
+
+      <button class="burger" id="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </header>
+
+    <!-- Перший екран -->
+    <main>
+      <section class="hero">
+        <span class="hero__line hero__line--1" aria-hidden="true"></span>
+        <span class="hero__line hero__line--2" aria-hidden="true"></span>
+
+        <img class="hero__photo" src="assets/img/portrait.png" width="820" height="720"
+             alt="Яна Панченко — UX/UI дизайнер" fetchpriority="high">
+
+        <h1 class="hero__title">
+          <span class="t-dark" data-i18n="hero.t1">Дизайн,</span>
+          <span class="t-grad" data-i18n="hero.t2">що працює</span>
+          <span class="t-grad" data-i18n="hero.t3">на вас</span>
+        </h1>
+
+        <p class="hero__tag"><span data-i18n="hero.tag">Аналіз. Стратегія. Дизайн</span></p>
+        <svg class="hero__arrow" viewBox="0 0 62 62" aria-hidden="true">
+          <path d="M6 56 L54 8 M16 6 H55 V45" fill="none" stroke="#b48fd6" stroke-width="5" stroke-linecap="square"/>
+        </svg>
+
+        <p class="hero__lead" data-i18n="hero.lead">Проєктую зрозумілі інтерфейси для бізнесу, допомагаючи ефективно виділитися серед конкурентів.</p>
+
+        <div class="cta">
+          <a class="btn btn--dark" href="#cases" data-i18n="hero.works">Дивитись роботи</a>
+          <a class="cta__link" href="#contact" data-i18n="hero.discuss">Обговорити проєкт</a>
+        </div>
+
+        <ul class="chips">
+          <li class="chip"><span data-i18n="chip.city">Київ.Україна</span></li>
+          <li class="chip"><span data-i18n="chip.mode">Фріланс/ Найм</span></li>
+          <li class="chip"><span data-i18n="chip.remote">Дистанційно</span></li>
+        </ul>
+      </section>
+
+      <!-- Кейси -->
+      <section class="cases" id="cases" aria-labelledby="cases-title">
+        <h2 class="cases__title" id="cases-title" data-i18n="cases.title">Кейси</h2>
+        <div class="cases__grid">
+          <a class="card" href="pages/case-foxy-donates.html">
+            <img class="card__img" src="assets/img/case-foxy.jpg" width="540" height="300" alt="Merch landing page — Foxtrot" loading="lazy">
+            <h3 class="card__title" data-i18n="case1.title">Лендінг мерчу - для Фокстрот.</h3>
+            <p class="card__text" data-i18n="case1.text">Проєкт гармонійно поєднує яскравий візуальний стиль та інтуїтивно зрозумілий інтерфейс.</p>
+          </a>
+          <a class="card" href="pages/case-look-at-me.html">
+            <img class="card__img" src="assets/img/case-lookatme.jpg" width="540" height="300" alt="Look At Me — редизайн сайту перукарні" loading="lazy">
+            <h3 class="card__title" data-i18n="case2.title">Редизайн сайту для перукарні - Look At Me</h3>
+            <p class="card__text" data-i18n="case2.text">Створено стильний та функціональний інтерфейс, який відповідає преміальному рівню послуг.</p>
+          </a>
+          <a class="card" href="pages/case-kids-clubs.html">
+            <img class="card__img" src="assets/img/case-kinder.jpg" width="540" height="300" alt="Kinder Clubs — сервіс пошуку дитячих гуртків" loading="lazy">
+            <h3 class="card__title" data-i18n="case3.title">Сервіс для пошуку дитячих гуртків - Kinder Clubs.</h3>
+            <p class="card__text" data-i18n="case3.text">Зроблено пошук та бронювання дитячих гуртків простим, швидким та наочним.</p>
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
