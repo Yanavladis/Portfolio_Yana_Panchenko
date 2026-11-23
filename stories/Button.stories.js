@@ -1,4 +1,4 @@
-// Кнопки: .btn (темна заливка) та .cta__link (текстове посилання)
+// Кнопки: «Дивитись роботи» (.btn--dark) і «Замовити» (.btn--order)
 const arrow =
   '<svg class="btn__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
@@ -8,7 +8,7 @@ export default {
     docs: {
       description: {
         component:
-          "Стани: default, hover (фон `#2c0a47`, підйом на 2px), focus-visible (контур 3px). Стану active, disabled і loading у проєкті немає.",
+          "Кнопка за макетом Figma. Стани: default (`#140022`, білий текст), hover (заливка `#c6a2de` + рамка 1px), active при натисканні (темна заливка, білий текст, показується миттєво; у Storybook клас `is-pressed`), disabled (сірий). Перехід 600ms ease-out. Hover показано класом `is-hover`, disabled — атрибутом `aria-disabled=\"true\"`.",
       },
     },
   },
@@ -18,53 +18,36 @@ export default {
   },
 };
 
-export const Dark = {
-  args: { label: "Дивитись роботи", withArrow: true },
-  render: ({ label, withArrow }) =>
-    `<a class="btn btn--dark" href="#"><span>${label}</span>${withArrow ? arrow : ""}</a>`,
-};
-
 const dark = (extra = "", label = "Дивитись роботи", icon = true) =>
   `<a class="btn btn--dark ${extra}" href="#"${extra.includes("is-disabled") ? ' aria-disabled="true" tabindex="-1"' : ""}><span>${label}</span>${icon ? arrow : ""}</a>`;
 
-export const DarkHover = {
-  name: "Dark — hover",
-  render: () => dark("is-hover"),
+const order = (extra = "", label = "Замовити") =>
+  `<a class="btn btn--order ${extra}" href="#"${extra.includes("is-disabled") ? ' aria-disabled="true" tabindex="-1"' : ""}>${label}</a>`;
+
+const column = (html) =>
+  `<div style="display:flex;flex-direction:column;gap:20px;align-items:flex-start">${html}</div>`;
+
+export const Dark = {
+  args: { label: "Дивитись роботи", withArrow: true },
+  render: ({ label, withArrow }) => dark("", label, withArrow),
 };
 
-export const DarkDisabled = {
-  name: "Dark — disabled",
-  render: () => dark("is-disabled"),
-};
-
-export const DarkWithoutIcon = {
-  name: "Dark — без стрілки (Icon: off)",
-  render: () => dark("", "Дивитись роботи", false),
-};
+export const DarkHover = { name: "Dark — hover", render: () => dark("is-hover") };
+export const DarkActive = { name: "Dark — active (натиснення)", render: () => dark("is-pressed") };
+export const DarkDisabled = { name: "Dark — disabled", render: () => dark("is-disabled") };
+export const DarkWithoutIcon = { name: "Dark — без стрілки (Icon: off)", render: () => dark("", "Дивитись роботи", false) };
 
 export const DarkStates = {
   name: "Dark — усі стани",
-  render: () =>
-    `<div style="display:flex;flex-direction:column;gap:20px;align-items:flex-start">
-      ${dark()}${dark("is-hover")}${dark()}${dark("is-disabled")}
-    </div>`,
+  render: () => column(`${dark()}${dark("is-hover")}${dark("is-pressed")}${dark("is-disabled")}`),
 };
 
 export const Order = {
   args: { label: "Замовити" },
-  render: ({ label }) => `<a class="btn btn--order" href="#">${label}</a>`,
+  render: ({ label }) => order("", label),
 };
 
-export const TextLink = {
-  args: { label: "Обговорити проєкт" },
-  render: ({ label }) => `<a class="cta__link" href="#">${label}</a>`,
-};
-
-export const CtaBlock = {
-  name: "CTA-блок (кнопка + посилання)",
-  render: () => `
-    <div class="cta" style="position:relative;left:0;top:0">
-      <a class="btn btn--dark" href="#"><span>Дивитись роботи</span>${arrow}</a>
-      <a class="cta__link" href="#">Обговорити проєкт</a>
-    </div>`,
+export const OrderStates = {
+  name: "Order — усі стани",
+  render: () => column(`${order()}${order("is-hover")}${order("is-pressed")}${order("is-disabled")}`),
 };

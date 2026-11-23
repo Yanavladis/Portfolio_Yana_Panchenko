@@ -62,11 +62,13 @@
 
         <p class="hero__lead" data-i18n="hero.lead">Проєктую зрозумілі інтерфейси для бізнесу, допомагаючи ефективно виділитися серед конкурентів.</p>
 
-        <div class="cta">
-          <a class="btn btn--dark" href="#cases"><span data-i18n="hero.works">Дивитись роботи</span>
+        <div class="cta" data-state="default">
+          <a class="cta__item is-active" href="#cases" data-cta="default" aria-current="true"><span data-i18n="hero.works">Дивитись роботи</span>
             <svg class="btn__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <a class="cta__link" href="#contact" data-i18n="hero.discuss">Обговорити проєкт</a>
+          <a class="cta__item" href="#contact" data-cta="click"><span data-i18n="hero.discuss">Обговорити проєкт</span>
+            <svg class="btn__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
         </div>
 
         <ul class="chips">

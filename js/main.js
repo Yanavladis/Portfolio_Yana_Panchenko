@@ -1,3 +1,20 @@
+/* Перемикач CTA: «Обговорити проєкт» → стан click, «Дивитись роботи» → назад до default */
+(function () {
+  var cta = document.querySelector(".cta[data-state]");
+  if (!cta) return;
+  var items = cta.querySelectorAll("[data-cta]");
+  cta.addEventListener("click", function (e) {
+    var item = e.target.closest("[data-cta]");
+    if (!item) return;
+    cta.setAttribute("data-state", item.getAttribute("data-cta"));
+    items.forEach(function (el) {
+      var on = el === item;
+      el.classList.toggle("is-active", on);
+      if (on) el.setAttribute("aria-current", "true"); else el.removeAttribute("aria-current");
+    });
+  });
+})();
+
 /* Мобільне меню */
 (function () {
   var burger = document.getElementById("burger");
