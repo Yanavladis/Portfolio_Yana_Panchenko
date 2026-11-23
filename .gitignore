@@ -1,2 +1,7 @@
 ﻿session-archive/
 Claude outputs/
+
+*storybook.log
+storybook-static
+node_modules/
+debug-storybook.log
