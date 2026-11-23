@@ -103,7 +103,17 @@ h1, h2, h3, p { margin: 0; }
   border-radius: calc(24 * var(--u)); background: var(--c-accent);
   box-shadow: 0 calc(6 * var(--u)) calc(14 * var(--u)) rgba(80, 40, 120, .22), inset 0 1px 0 rgba(255,255,255,.35);
 }
-.btn--dark { gap: calc(12 * var(--u)); height: calc(77 * var(--u)); padding: 0 calc(24 * var(--u)); border-radius: calc(20 * var(--u)); font-size: calc(24 * var(--u)); }
+/* Кнопка за макетом Figma: auto layout, gap 10, padding 24, висота 78; зміна стану — Smart animate, ease out, 600ms */
+.btn--dark {
+  gap: calc(10 * var(--u)); height: calc(78 * var(--u)); padding: 0 calc(24 * var(--u)); border-radius: calc(16 * var(--u)); font-size: calc(24 * var(--u));
+  border: 1px solid transparent;
+  transition: background-color 600ms ease-out, color 600ms ease-out, border-color 600ms ease-out;
+}
+.btn--dark:hover, .btn--dark.is-hover { background: var(--c-accent); color: var(--c-ink); border-color: var(--c-ink); transform: none; }
+.btn--dark:active { background: var(--c-ink); color: var(--c-white); border-color: transparent; }
+.btn--dark[aria-disabled="true"], .btn--dark.is-disabled {
+  background: #a6a3a8; color: #7e7a82; border-color: transparent; cursor: not-allowed; pointer-events: none; transform: none;
+}
 .btn__arrow { width: calc(24 * var(--u)); height: calc(24 * var(--u)); flex: none; }
 .cta__link { padding: 0 calc(24 * var(--u)) 0 calc(24 * var(--u)); font-size: calc(24 * var(--u)); font-weight: 600; text-transform: uppercase; letter-spacing: 0; white-space: nowrap; transition: opacity .2s; }
 .cta__link:hover { opacity: .7; }

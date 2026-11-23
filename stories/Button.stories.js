@@ -24,6 +24,32 @@ export const Dark = {
     `<a class="btn btn--dark" href="#"><span>${label}</span>${withArrow ? arrow : ""}</a>`,
 };
 
+const dark = (extra = "", label = "Дивитись роботи", icon = true) =>
+  `<a class="btn btn--dark ${extra}" href="#"${extra.includes("is-disabled") ? ' aria-disabled="true" tabindex="-1"' : ""}><span>${label}</span>${icon ? arrow : ""}</a>`;
+
+export const DarkHover = {
+  name: "Dark — hover",
+  render: () => dark("is-hover"),
+};
+
+export const DarkDisabled = {
+  name: "Dark — disabled",
+  render: () => dark("is-disabled"),
+};
+
+export const DarkWithoutIcon = {
+  name: "Dark — без стрілки (Icon: off)",
+  render: () => dark("", "Дивитись роботи", false),
+};
+
+export const DarkStates = {
+  name: "Dark — усі стани",
+  render: () =>
+    `<div style="display:flex;flex-direction:column;gap:20px;align-items:flex-start">
+      ${dark()}${dark("is-hover")}${dark()}${dark("is-disabled")}
+    </div>`,
+};
+
 export const Order = {
   args: { label: "Замовити" },
   render: ({ label }) => `<a class="btn btn--order" href="#">${label}</a>`,
