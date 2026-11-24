@@ -8,7 +8,7 @@ export default {
     docs: {
       description: {
         component:
-          "Кнопка за макетом Figma. Стани: default (`#140022`, білий текст), hover (заливка `#c6a2de` + рамка 1px), active при натисканні (темна заливка, білий текст, показується миттєво; у Storybook клас `is-pressed`), disabled (сірий). Перехід 600ms ease-out. Hover показано класом `is-hover`, disabled — атрибутом `aria-disabled=\"true\"`.",
+          "Кнопка за макетом Figma: padding 24, gap 10, радіус 16, заливка `#140022`, ширина й висота за вмістом (висота 76). Стани: default (`#140022`, білий текст), hover (заливка `#c6a2de` + рамка 1px), active при натисканні (темна заливка, білий текст, показується миттєво; у Storybook клас `is-pressed`), disabled (сірий). Перехід 600ms ease-out. Hover показано класом `is-hover`, disabled — атрибутом `aria-disabled=\"true\"`.",
       },
     },
   },
