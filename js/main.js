@@ -1,3 +1,14 @@
+/* Показ сітки: клавіша G або ?grid в адресі */
+(function () {
+  var root = document.documentElement;
+  if (/[?&]grid\b/.test(location.search)) root.setAttribute("data-grid", "");
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "g" && e.key !== "G") return;
+    if (e.target.closest && e.target.closest("input, textarea, select")) return;
+    if (root.hasAttribute("data-grid")) root.removeAttribute("data-grid"); else root.setAttribute("data-grid", "");
+  });
+})();
+
 /* Перемикач CTA: «Обговорити проєкт» → стан click, «Дивитись роботи» → назад до default */
 (function () {
   var cta = document.querySelector(".cta[data-state]");

@@ -14,7 +14,20 @@
   --c-white: #fff;
   --font: "Montserrat", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
   --u: calc(min(100vw, 1920px) / 1920);   /* 1 «піксель макета» */
+
+  /* Сітка десктопу (Figma): 12 колонок, stretch, margin 100, gutter 30, макет 1920 */
+  --grid-margin: calc(100 * var(--u));
+  --grid-gutter: calc(30 * var(--u));
+  --grid-col: calc((1920 - 2 * 100 - 11 * 30) / 12 * var(--u));   /* ширина колонки ≈ 115,83 */
+  /* початок колонки n (n = 1…12): calc(var(--grid-margin) + (n - 1) * (var(--grid-col) + var(--grid-gutter))) */
 }
+
+/* Показ сітки: натисніть G або додайте ?grid до адреси (колір 836F9A, 10%) */
+html[data-grid] .page::after {
+  content: ""; position: absolute; top: 0; bottom: 0; left: var(--grid-margin); right: var(--grid-margin); z-index: 100; pointer-events: none;
+  background: repeating-linear-gradient(90deg, rgba(131, 111, 154, .1) 0, rgba(131, 111, 154, .1) var(--grid-col), transparent var(--grid-col), transparent calc(var(--grid-col) + var(--grid-gutter)));
+}
+@media (max-width: 1199.98px) { html[data-grid] .page::after { display: none; } }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
@@ -53,24 +66,32 @@ h1, h2, h3, p { margin: 0; }
 .btn:focus-visible, a:focus-visible, button:focus-visible { outline: 3px solid var(--c-accent-strong); outline-offset: 3px; }
 
 /* ---------- Шапка (десктоп) ---------- */
-.header { position: absolute; inset: 0 0 auto 0; height: calc(136 * var(--u)); z-index: 5; font-size: calc(24 * var(--u)); text-transform: uppercase; font-weight: 500; display: flex; align-items: center; justify-content: flex-end; gap: 20px; padding-right: calc(100 * var(--u)); }
-.header::after { content: ""; position: absolute; left: calc(100 * var(--u)); right: calc(100 * var(--u)); top: calc(113 * var(--u)); height: 1px; background: linear-gradient(90deg, #140022 0%, #140022 50%, rgba(20,0,34,0) 100%); }
-.logo { position: absolute; left: calc(100 * var(--u)); top: calc(40 * var(--u)); display: flex; align-items: center; gap: calc(11 * var(--u)); }
-.logo__star { width: calc(50 * var(--u)); height: calc(50 * var(--u)); flex: none; }
-.logo__text { line-height: 1.22; letter-spacing: 0; font-weight: 500; }
+/* ЗАФІКСОВАНО (десктоп, не змінювати без прямої вказівки власниці сайту):
+   шапка шириною 1720 (поля 100), висота 76 за вмістом, відступ зверху 30; лінія на 114 від верху (8 під шапкою);
+   зірка 68×68; текст Caps_24 (Montserrat Medium 24/28, трекінг 2%); меню з 4 об'єктів з відступом 64;
+   відступи меню → EN/UA і EN/UA → «Замовити» по 60; кнопка «Замовити»: padding 24, gap 10, радіус 16, заливка #140022, розмір за вмістом (76). */
+.header { position: absolute; top: calc(30 * var(--u)); left: calc(100 * var(--u)); right: calc(100 * var(--u)); height: calc(76 * var(--u)); z-index: 5; font-size: calc(24 * var(--u)); text-transform: uppercase; font-weight: 500; display: flex; align-items: center; justify-content: flex-end; gap: 0; }
+.header::after { content: ""; position: absolute; left: 0; right: 0; top: calc(84 * var(--u)); height: 1px; background: linear-gradient(90deg, #140022 0%, #140022 50%, rgba(20,0,34,0) 100%); }
+/* Текст шапки: стиль Caps_24 з Figma — Montserrat Medium 24, висота рядка 28, трекінг 2% */
+.logo { position: static; margin-right: auto; display: flex; align-items: center; gap: calc(11 * var(--u)); }
+.logo__star { width: calc(68 * var(--u)); height: calc(68 * var(--u)); flex: none; }
+.logo__text { line-height: calc(28 * var(--u)); letter-spacing: .02em; font-weight: 500; }
 
-.nav { position: static; height: 100%; display: flex; align-items: center; gap: calc(64 * var(--u)); }
-.nav__link { position: relative; letter-spacing: 0; transition: color .2s; }
+/* Меню за макетом Figma: auto layout, 4 об'єкти, gap 64, padding 16 по вертикалі, висота 60 (hug) */
+.nav { position: static; display: flex; align-items: center; gap: calc(64 * var(--u)); padding: calc(16 * var(--u)) 0; }
+/* Трекінг 2% додає порожнє місце після останньої літери; віднімаємо його, щоб проміжок був рівно 64 */
+.nav__link { position: relative; display: flex; align-items: center; line-height: calc(28 * var(--u)); letter-spacing: .02em; margin-right: -.02em; transition: color .2s; }
 .nav__link:hover { color: #7b49a6; }
-.nav__link--dot { margin-left: calc(24 * var(--u)); }
-.nav__link--dot::before { content: ""; position: absolute; left: calc(-24 * var(--u)); top: 50%; width: calc(12 * var(--u)); height: calc(12 * var(--u)); margin-top: calc(-6 * var(--u)); border-radius: 50%; background: var(--c-accent); }
+/* «Роботи» разом з крапкою — один об'єкт меню */
+.nav__link--dot { gap: calc(12 * var(--u)); }
+.nav__link--dot::before { content: ""; flex: none; width: calc(12 * var(--u)); height: calc(12 * var(--u)); border-radius: 50%; background: var(--c-accent); }
 
-.lang { position: static; height: 100%; display: flex; align-items: center; gap: .35em; letter-spacing: 0; }
+.lang { position: static; margin-left: calc(60 * var(--u)); /* відстань від меню */ display: flex; align-items: center; gap: .35em; line-height: calc(28 * var(--u)); letter-spacing: .02em; }
 .lang__btn { text-transform: uppercase; font-weight: 500; opacity: 1; transition: color .2s; }
 .lang__btn:hover { color: #7b49a6; }
 .lang__btn.is-active { font-weight: 500; }
 
-.btn--order { position: static; flex: none; width: calc(192 * var(--u)); height: calc(78 * var(--u)); border-radius: calc(16 * var(--u)); font-size: calc(24 * var(--u)); }
+.btn--order { position: static; margin-left: calc(60 * var(--u)); flex: none; }
 .burger { display: none; }
 
 /* ---------- Hero (десктоп: абсолютні координати макета) ---------- */
@@ -106,18 +127,17 @@ h1, h2, h3, p { margin: 0; }
   transition: padding 600ms ease-out;
 }
 .cta[data-state="click"] { padding: calc(12 * var(--u)) calc(12 * var(--u)) calc(12 * var(--u)) calc(16 * var(--u)); }
-/* Кнопка за макетом Figma: auto layout, gap 10, padding 24, висота 78; зміна стану — Smart animate, ease out, 600ms */
-.btn--dark {
-  gap: calc(10 * var(--u)); height: calc(78 * var(--u)); padding: 0 calc(24 * var(--u)); border-radius: calc(16 * var(--u)); font-size: calc(24 * var(--u));
-  border: 1px solid transparent;
-  transition: background-color 600ms ease-out, color 600ms ease-out, border-color 600ms ease-out;
+/* Кнопка за макетом Figma: auto layout, gap 10, padding 24, ширина й висота за вмістом (76 = 24 + рядок 28 + 24), радіус 16, заливка #140022; зміна стану — 600ms ease-out */
+.btn--dark, .btn--order {
+  gap: calc(10 * var(--u)); padding: calc(24 * var(--u)); line-height: calc(28 * var(--u)); border-radius: calc(16 * var(--u)); font-size: calc(24 * var(--u));
+  transition: background-color 600ms ease-out, color 600ms ease-out, box-shadow 600ms ease-out;
 }
-.btn--order { border: 1px solid transparent; transition: background-color 600ms ease-out, color 600ms ease-out, border-color 600ms ease-out; }
-.btn--dark:hover, .btn--dark.is-hover, .btn--order:hover, .btn--order.is-hover { background: var(--c-accent); color: var(--c-ink); border-color: var(--c-ink); transform: none; }
+/* Рамка hover — внутрішня тінь, щоб розмір кнопки не змінювався */
+.btn--dark:hover, .btn--dark.is-hover, .btn--order:hover, .btn--order.is-hover { background: var(--c-accent); color: var(--c-ink); box-shadow: inset 0 0 0 1px var(--c-ink); transform: none; }
 /* Active (натиснення): темна заливка, білий текст; вмикається миттєво, поки кнопка затиснута */
-.btn--dark:active, .btn--dark.is-pressed, .btn--order:active, .btn--order.is-pressed { background: var(--c-ink); color: var(--c-white); border-color: transparent; transition-duration: 0s; }
+.btn--dark:active, .btn--dark.is-pressed, .btn--order:active, .btn--order.is-pressed { background: var(--c-ink); color: var(--c-white); box-shadow: none; transition-duration: 0s; }
 .btn--dark[aria-disabled="true"], .btn--dark.is-disabled, .btn--order[aria-disabled="true"], .btn--order.is-disabled {
-  background: #a6a3a8; color: #7e7a82; border-color: transparent; cursor: not-allowed; pointer-events: none; transform: none;
+  background: #a6a3a8; color: #7e7a82; box-shadow: none; cursor: not-allowed; pointer-events: none; transform: none;
 }
 .btn__arrow { width: calc(24 * var(--u)); height: calc(24 * var(--u)); flex: none; }
 
@@ -188,16 +208,18 @@ h1, h2, h3, p { margin: 0; }
 
   /* Шапка */
   .header {
-    position: relative; height: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    position: relative; top: auto; left: auto; right: auto; height: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px;
     padding: 18px var(--gutter); font-size: 16px; flex-wrap: wrap;
   }
   .header::after { left: var(--gutter); right: var(--gutter); top: auto; bottom: 0; }
   .logo, .nav, .lang, .btn--order { position: static; }
+  .lang, .btn--order { margin-left: 0; }
   .logo { gap: 10px; order: 1; margin-right: auto; }
   .logo__star { width: 38px; height: 38px; }
-  .logo__text { font-size: 14px; }
-  .lang { order: 2; font-size: 15px; }
-  .btn--order { order: 3; width: auto; height: 46px; padding: 0 20px; border-radius: 12px; font-size: 14px; }
+  .logo__text { font-size: 14px; line-height: 1.22; letter-spacing: 0; }
+  .nav__link { line-height: normal; letter-spacing: 0; }
+  .lang { order: 2; font-size: 15px; line-height: normal; letter-spacing: 0; }
+  .btn--order { order: 3; width: auto; height: 46px; padding: 0 20px; line-height: normal; border-radius: 12px; font-size: 14px; }
   .burger { order: 4; display: inline-flex; flex-direction: column; justify-content: center; gap: 5px; width: 46px; height: 46px; align-items: center; border-radius: 12px; background: rgba(255,255,255,.45); border: 1px solid rgba(255,255,255,.6); }
   .burger span { width: 20px; height: 2px; border-radius: 2px; background: var(--c-ink); transition: transform .25s, opacity .25s; }
   .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -210,10 +232,10 @@ h1, h2, h3, p { margin: 0; }
     backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   }
   .nav.is-open { display: flex; }
-  .nav__link, .nav__link--dot { margin: 0; padding: 14px 14px 14px 34px; font-size: 16px; }
+  .nav__link, .nav__link--dot { display: block; margin: 0; padding: 14px 14px 14px 34px; font-size: 16px; }
   .nav__link { padding-left: 14px; }
   .nav__link--dot { padding-left: 34px; }
-  .nav__link--dot::before { left: 14px; width: 10px; height: 10px; margin-top: -5px; }
+  .nav__link--dot::before { position: absolute; left: 14px; top: 50%; width: 10px; height: 10px; margin-top: -5px; }
 
   /* Hero: розкладка в потік */
   .hero {
