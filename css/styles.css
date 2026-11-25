@@ -224,16 +224,16 @@ h1, h2, h3, p { margin: 0; }
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
 }
-.cases__title { font-size: calc(24 * var(--u)); font-weight: 700; line-height: calc(28 * var(--u)); letter-spacing: .02em; /* Bold_24: Montserrat Bold 24, висота рядка 28, трекінг 2% */ margin: 0 0 calc(18 * var(--u)); }
+.cases__title { font-size: calc(24 * var(--u)); font-weight: 700; line-height: calc(28 * var(--u)); letter-spacing: .02em; /* Bold_24: Montserrat Bold 24, висота рядка 28, трекінг 2% */ margin: 0 0 calc(20 * var(--u)); /* gap 20 за макетом */ }
 .cases__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: calc(30 * var(--u)); }
-/* Картка за макетом Figma: auto layout по вертикалі, gap 20, padding 0, висота 456, ширина 540 (Fill) */
+/* Картка за макетом Figma: auto layout по вертикалі, padding 0, ширина 540 (Fill), висота 456 = картинка 300 + gap 20 + заголовок 56 + gap 8 + текст 72 */
 .card { color: #140022; display: flex; flex-direction: column; gap: calc(20 * var(--u)); height: calc(456 * var(--u)); transition: transform .25s ease; }
 .card:hover { transform: translateY(calc(-4 * var(--u))); }
 .card__img { width: 100%; aspect-ratio: 540 / 300; object-fit: cover; border-radius: calc(16 * var(--u)); }
 /* Стилі тексту за макетом Figma: заголовок картки — Bold_24 (Montserrat Bold 24, висота рядка 28, трекінг 2%), основний текст — Medium_20 (Montserrat Medium 20, висота рядка 24, трекінг 2%) */
 /* Блок заголовка завжди висотою 56 (два рядки по 28), як у макеті (491 × 56 Hug), щоб тексти всіх карток починались на одному рівні */
 .card__title { margin: 0; min-height: calc(56 * var(--u)); padding-right: calc(40 * var(--u)); font-size: calc(24 * var(--u)); line-height: calc(28 * var(--u)); font-weight: 700; letter-spacing: .02em; }
-.card__text { margin: 0; letter-spacing: .02em; font-size: calc(20 * var(--u)); line-height: calc(24 * var(--u)); font-weight: 500; }
+.card__text { margin: calc(-12 * var(--u)) 0 0; /* відступ від заголовка 8 (20 − 12) */ letter-spacing: .02em; font-size: calc(20 * var(--u)); line-height: calc(24 * var(--u)); font-weight: 500; }
 
 /* ==========================================================
    Планшет і смартфон (< 1200px)
