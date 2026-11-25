@@ -14,8 +14,8 @@
       "case1.text": "Проєкт гармонійно поєднує яскравий візуальний стиль та інтуїтивно зрозумілий інтерфейс.",
       "case2.title": "Редизайн сайту для перукарні - Look At Me",
       "case2.text": "Створено стильний та функціональний інтерфейс, який відповідає преміальному рівню послуг.",
-      "case3.title": "Сервіс для пошуку дитячих гуртків - Kinder Clubs.",
-      "case3.text": "Зроблено пошук та бронювання дитячих гуртків простим, швидким та наочним."
+      "case3.title": "Лендінг для кав'ярні - Park Coffee",
+      "case3.text": "Зручні сценарії бронювання столика та перегляду відгуків допомагають гостям швидко обрати час для візиту."
     },
     en: {
       "logo.name": "Yana Panchenko", "logo.role": "UX/UI designer",
@@ -30,8 +30,8 @@
       "case1.text": "The project blends a vivid visual style with an intuitive, easy-to-understand interface.",
       "case2.title": "Barbershop website redesign - Look At Me",
       "case2.text": "A stylish, functional interface that matches the premium level of the service.",
-      "case3.title": "Kids' clubs search service - Kinder Clubs.",
-      "case3.text": "Finding and booking kids' clubs made simple, fast and clear."
+      "case3.title": "Landing page for a coffee shop - Park Coffee",
+      "case3.text": "Convenient scenarios for booking a table and viewing reviews help guests quickly choose a time to visit."
     }
   };
 

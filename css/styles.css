@@ -95,12 +95,23 @@ h1, h2, h3, p { margin: 0; }
 .burger { display: none; }
 
 /* ---------- Hero (десктоп: абсолютні координати макета) ---------- */
-.hero { position: relative; height: calc(1080 * var(--u)); }
+.hero { position: relative; height: calc(1077 * var(--u)); }   /* блок «Кейси» починається на 1077 від верху за макетом Figma */
 .hero > * { position: absolute; }
 
 .hero__line { top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.25)); }
 .hero__line--1 { left: calc(1091 * var(--u)); }
-.hero__line--2 { left: calc(1676 * var(--u)); }
+/* Лінія на фоні за макетом Figma: X 1674, довжина 1324 (від верху), обводка 0,5 з градієнтом Gradient_white (#FFFFFF 100% → 0%); 0,5px передано напівпрозорою лінією в 1px */
+.hero__line--1, .hero__line--2, .hero__line--3, .hero__line--4 { top: 0; bottom: auto; height: calc(1324 * var(--u)); width: 1px; opacity: .5; background: linear-gradient(180deg, #ffffff, rgba(255, 255, 255, 0)); }
+.hero__line--4 { left: calc((1920 - 945) * var(--u)); }         /* 945 від правого краю, верх 0 */
+.hero__line--1 { left: calc((1920 - 829) * var(--u)); }         /* 829 від правого краю, верх 0 */
+.hero__line--2 { left: calc(1674 * var(--u)); }                 /* 246 від правого краю */
+.hero__line--3 { left: calc((1920 - 362) * var(--u)); }         /* 362 від правого краю, верх 0 */
+/* Зірки на лініях: 40 × 40, 4 промені, співвідношення 5%, заливка білим, обводка Gradient_white; центр на лінії */
+.hero__star { width: calc(40 * var(--u)); height: calc(40 * var(--u)); z-index: 2; pointer-events: none; }
+.hero__star--1 { left: calc(1654 * var(--u)); top: calc(728 * var(--u)); }
+.hero__star--4 { left: calc((1920 - 925 - 40) * var(--u)); top: calc(803 * var(--u)); }   /* права межа на 925 від правого краю, верх 803 */
+.hero__star--3 { left: calc((1920 - 808 - 40) * var(--u)); top: calc(659 * var(--u)); }   /* права межа на 808 від правого краю, верх 659 */
+.hero__star--2 { left: calc((1920 - 362 - 20) * var(--u)); top: calc(591 * var(--u)); }   /* верх 591 від верхнього краю */
 
 /* Фото 716 × 821: відстань від правого краю сторінки 256 (1920 − 256 − 716 = 948) */
 .hero__photo { left: calc(948 * var(--u)); top: calc(262 * var(--u)); width: calc(716 * var(--u)); height: calc(821 * var(--u)); max-width: none; z-index: 1; pointer-events: none; }
@@ -198,7 +209,7 @@ h1, h2, h3, p { margin: 0; }
 .cases {
   position: relative; z-index: 3;
   margin: 0 calc(100 * var(--u));
-  padding: calc(20 * var(--u));
+  padding: calc(40 * var(--u)) calc(20 * var(--u));   /* за макетом Figma: верх і низ 40, ліво і право 20 */
   border-radius: calc(24 * var(--u));
   background: linear-gradient(180deg, rgba(231, 220, 243, .78), rgba(215, 200, 232, .72));
   box-shadow: 0 calc(10 * var(--u)) calc(40 * var(--u)) rgba(90, 60, 140, .1);
@@ -213,13 +224,16 @@ h1, h2, h3, p { margin: 0; }
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
 }
-.cases__title { font-size: calc(24 * var(--u)); font-weight: 600; line-height: calc(29 / 24); margin: 0 0 calc(18 * var(--u)); }
+.cases__title { font-size: calc(24 * var(--u)); font-weight: 700; line-height: calc(28 * var(--u)); letter-spacing: .02em; /* Bold_24: Montserrat Bold 24, висота рядка 28, трекінг 2% */ margin: 0 0 calc(18 * var(--u)); }
 .cases__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: calc(30 * var(--u)); }
-.card { display: block; transition: transform .25s ease; }
+/* Картка за макетом Figma: auto layout по вертикалі, gap 20, padding 0, висота 456, ширина 540 (Fill) */
+.card { color: #140022; display: flex; flex-direction: column; gap: calc(20 * var(--u)); height: calc(456 * var(--u)); transition: transform .25s ease; }
 .card:hover { transform: translateY(calc(-4 * var(--u))); }
 .card__img { width: 100%; aspect-ratio: 540 / 300; object-fit: cover; border-radius: calc(16 * var(--u)); }
-.card__title { margin-top: calc(16 * var(--u)); padding-right: calc(40 * var(--u)); font-size: calc(26 * var(--u)); line-height: calc(29 / 26); font-weight: 600; letter-spacing: 0; min-height: calc(58 * var(--u)); }
-.card__text { margin-top: calc(6 * var(--u)); letter-spacing: 0; font-size: calc(20 * var(--u)); line-height: calc(24 / 20); font-weight: 400; }
+/* Стилі тексту за макетом Figma: заголовок картки — Bold_24 (Montserrat Bold 24, висота рядка 28, трекінг 2%), основний текст — Medium_20 (Montserrat Medium 20, висота рядка 24, трекінг 2%) */
+/* Блок заголовка завжди висотою 56 (два рядки по 28), як у макеті (491 × 56 Hug), щоб тексти всіх карток починались на одному рівні */
+.card__title { margin: 0; min-height: calc(56 * var(--u)); padding-right: calc(40 * var(--u)); font-size: calc(24 * var(--u)); line-height: calc(28 * var(--u)); font-weight: 700; letter-spacing: .02em; }
+.card__text { margin: 0; letter-spacing: .02em; font-size: calc(20 * var(--u)); line-height: calc(24 * var(--u)); font-weight: 500; }
 
 /* ==========================================================
    Планшет і смартфон (< 1200px)
@@ -277,7 +291,7 @@ h1, h2, h3, p { margin: 0; }
   .cta { grid-area: cta; }
   .hero > .social { grid-area: social; }
   .hero > * { position: static; }
-  .hero__line { display: none; }
+  .hero__line, .hero__star { display: none; }
 
   .hero__title { display: block; width: auto; font-size: var(--t); line-height: 1.04; white-space: normal; }
   .hero__title span { line-height: inherit; }
@@ -303,11 +317,12 @@ h1, h2, h3, p { margin: 0; }
 
   /* Кейси */
   .cases { margin: 0 var(--gutter); padding: clamp(14px, 3vw, 20px); border-radius: 20px; min-height: 0; }
-  .cases__title { font-size: 20px; margin: 2px 0 16px; }
+  .cases__title { font-size: 20px; line-height: normal; letter-spacing: 0; font-weight: 600; margin: 2px 0 16px; }
   .cases__grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .card { display: block; height: auto; }
   .card__img { border-radius: 12px; }
-  .card__title { padding-right: 0; margin-top: 12px; font-size: clamp(15px, 1.9vw, 20px); line-height: 1.25; min-height: 0; }
-  .card__text { margin-top: 8px; font-size: clamp(13px, 1.6vw, 16px); line-height: 1.4; }
+  .card__title { padding-right: 0; margin-top: 12px; font-size: clamp(15px, 1.9vw, 20px); line-height: 1.25; letter-spacing: 0; font-weight: 600; min-height: 0; }
+  .card__text { margin-top: 8px; font-size: clamp(13px, 1.6vw, 16px); line-height: 1.4; letter-spacing: 0; font-weight: 400; }
 }
 
 @media (max-width: 899.98px) {
