@@ -1,6 +1,26 @@
 // Чипи «Київ.Україна», «Фріланс/ Найм», «Дистанційно» (не інтерактивні)
+// Фон сторінки підкладено, щоб було видно ефект скла (Glass) і градієнтну обводку.
 export default {
   title: "Components/Chip",
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "За макетом Figma: чип 293 × 70, padding 12/20/20/20, gap усередині 0, текст 24, радіус 16, заливка `#FFFFFF` 20%, ефект Glass (наближено: розмиття фону + внутрішнє світло), обводка 1px всередині з градієнтом `#140022` до 50%, далі зникає вправо. Група з 3 чипів 293 × 266, відступ між чипами 28.",
+      },
+    },
+  },
+  decorators: [
+    (story) => {
+      const wrap = document.createElement("div");
+      wrap.style.cssText =
+        "padding:40px;background:url('assets/img/hero-bg.webp') center / cover no-repeat;min-height:320px";
+      const content = story();
+      if (typeof content === "string") wrap.innerHTML = content;
+      else wrap.appendChild(content);
+      return wrap;
+    },
+  ],
   argTypes: { label: { control: "text" } },
 };
 

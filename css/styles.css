@@ -102,24 +102,32 @@ h1, h2, h3, p { margin: 0; }
 .hero__line--1 { left: calc(1091 * var(--u)); }
 .hero__line--2 { left: calc(1676 * var(--u)); }
 
-.hero__photo { left: calc(1000 * var(--u)); top: calc(262 * var(--u)); width: calc(716 * var(--u)); height: calc(821 * var(--u)); max-width: none; z-index: 1; pointer-events: none; }
+/* Фото 716 × 821: відстань від правого краю сторінки 256 (1920 − 256 − 716 = 948) */
+.hero__photo { left: calc(948 * var(--u)); top: calc(262 * var(--u)); width: calc(716 * var(--u)); height: calc(821 * var(--u)); max-width: none; z-index: 1; pointer-events: none; }
 
 .hero__title {
-  left: calc(100 * var(--u)); top: calc(264 * var(--u)); z-index: 2;
-  font-size: calc(128 * var(--u)); line-height: calc(132 / 128); font-weight: 800; text-transform: uppercase; letter-spacing: 0;
+  /* Фрейм заголовка за макетом Figma: X 100, Y 258 (152 нижче шапки), 932 × 400; auto layout по вертикалі, gap 16, padding 0 */
+  left: calc(100 * var(--u)); top: calc(258 * var(--u)); width: calc(932 * var(--u)); z-index: 2;
+  display: flex; flex-direction: column; align-items: flex-start;
+  font-size: calc(128 * var(--u)); font-weight: 800; text-transform: uppercase; letter-spacing: 0;
   white-space: nowrap;
 }
-.hero__title span { display: block; }
+/* Рядок «ДИЗАЙН,» 650 × 128 (поруч нього підпис і стрілка: відстань 98), далі відступ 16 і два рядки по 128: 128 + 16 + 256 = 400 */
+.hero__title span { display: block; line-height: calc(128 * var(--u)); }
+.hero__title span:nth-child(2) { margin-top: calc(16 * var(--u)); }
 .t-dark { color: var(--c-ink); }
 .t-grad { width: max-content; background: linear-gradient(90deg, var(--c-grad-from) 0%, #6a4590 55%, var(--c-grad-to) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
 
-.hero__tag { left: calc(848 * var(--u)); top: calc(315 * var(--u)); z-index: 2; width: calc(140 * var(--u)); font-size: calc(24 * var(--u)); line-height: calc(26 / 24); font-weight: 500; letter-spacing: 0; }
-.hero__arrow { left: calc(968 * var(--u)); top: calc(322 * var(--u)); width: calc(62 * var(--u)); height: calc(62 * var(--u)); z-index: 2; }
+/* Підпис за макетом Figma: 112 × 72 (3 рядки по 24), стрілка 60 × 60 */
+.hero__tag { left: calc(848 * var(--u)); top: calc(315 * var(--u)); z-index: 2; width: calc(112 * var(--u)); font-size: calc(20 * var(--u)); line-height: calc(24 * var(--u)); font-weight: 500; letter-spacing: 0; }
+.hero__arrow { left: calc(972 * var(--u)); top: calc(322 * var(--u)); width: calc(60 * var(--u)); height: calc(60 * var(--u)); z-index: 2; }
 
-.hero__lead { left: calc(100 * var(--u)); top: calc(678 * var(--u)); width: calc(560 * var(--u)); z-index: 2; font-size: calc(24 * var(--u)); line-height: calc(29 / 24); font-weight: 500; letter-spacing: 0; }
+/* Блок під заголовком за макетом Figma: фрейм 704 × 331 на X 100, Y 674 (16 нижче заголовка: 258 + 400 + 16), auto layout по вертикалі, gap 148;
+   підзаголовок: розмір 24, висота рядка 28, 3 рядки = 84, далі gap 148 і перемикач висотою 102 */
+.hero__lead { left: calc(100 * var(--u)); top: calc(674 * var(--u)); width: calc(704 * var(--u)); z-index: 2; font-size: calc(24 * var(--u)); line-height: calc(28 * var(--u)); color: #140022; font-weight: 500; letter-spacing: 0; }
 
 .cta {
-  left: calc(100 * var(--u)); top: calc(907 * var(--u)); z-index: 2;
+  left: calc(100 * var(--u)); top: calc(906 * var(--u)); z-index: 2;   /* 674 + 84 + 148 */
   /* Перемикач за макетом Figma: auto layout, gap 24, padding 12 (16 з боку неактивного пункту), Smart animate 600ms ease-out */
   display: flex; align-items: center; gap: calc(24 * var(--u)); padding: calc(12 * var(--u)) calc(16 * var(--u)) calc(12 * var(--u)) calc(12 * var(--u));
   border-radius: calc(24 * var(--u)); background: var(--c-accent);
@@ -141,35 +149,51 @@ h1, h2, h3, p { margin: 0; }
 }
 .btn__arrow { width: calc(24 * var(--u)); height: calc(24 * var(--u)); flex: none; }
 
-/* Пункти перемикача CTA: активний — темна «таблетка» зі стрілкою, неактивний — текст */
+/* Пункти перемикача CTA: активний — це компонент Button (padding 24, gap 10, висота 76, радіус 16, #140022 + його стани), неактивний — текст */
 .cta__item {
-  display: inline-flex; align-items: center; height: calc(78 * var(--u)); padding: 0; border-radius: calc(16 * var(--u));
-  font-size: calc(24 * var(--u)); font-weight: 600; text-transform: uppercase; letter-spacing: 0; white-space: nowrap;
+  display: inline-flex; align-items: center; height: calc(76 * var(--u)); padding: 0; border-radius: calc(16 * var(--u));
+  font-size: calc(24 * var(--u)); line-height: calc(28 * var(--u)); font-weight: 600; text-transform: uppercase; letter-spacing: 0; white-space: nowrap;
   color: var(--c-ink); background: transparent;
-  transition: background-color 600ms ease-out, color 600ms ease-out, padding 600ms ease-out, opacity .2s;
+  transition: background-color 600ms ease-out, color 600ms ease-out, padding 600ms ease-out, box-shadow 600ms ease-out, opacity .2s;
 }
 .cta__item.is-active { padding: 0 calc(24 * var(--u)); background: var(--c-ink); color: var(--c-white); }
+/* Стани кнопки Button на активному пункті: hover — заливка #c6a2de + рамка 1px, натиснення — миттєво темна */
+.cta__item.is-active:hover { background: var(--c-accent); color: var(--c-ink); box-shadow: inset 0 0 0 1px var(--c-ink); }
+.cta__item.is-active:active { background: var(--c-ink); color: var(--c-white); box-shadow: none; transition-duration: 0s; }
 .cta[data-state="click"] .cta__item:not(.is-active) { color: var(--c-white); }
 .cta__item:not(.is-active):hover { opacity: .7; }
 .cta__item .btn__arrow { width: 0; margin-left: 0; opacity: 0; transition: width 600ms ease-out, margin-left 600ms ease-out, opacity 600ms ease-out; }
 .cta__item.is-active .btn__arrow { width: calc(24 * var(--u)); margin-left: calc(10 * var(--u)); opacity: 1; }
 
-.social { left: calc(1668 * var(--u)); top: calc(956 * var(--u)); z-index: 2; width: calc(162 * var(--u)); display: flex; justify-content: flex-end; gap: calc(26 * var(--u)); padding: 0 calc(10 * var(--u)) calc(22 * var(--u)) 0; }
+/* Іконки за макетом Figma: auto layout 176 × 65 (за вмістом), іконки 48 × 48, gap 8, padding 8, колір #140022; знизу лінія 1px (65 = 8 + 48 + 8 + 1).
+   Правий край 1820; лінія лишилась на колишньому місці (низ на 1008) */
+.social { left: calc(1644 * var(--u)); top: calc(943 * var(--u)); z-index: 2; display: flex; align-items: center; gap: calc(8 * var(--u)); padding: calc(8 * var(--u)) calc(8 * var(--u)) calc(9 * var(--u)); }
 .social::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: linear-gradient(90deg, #140022 0%, #140022 50%, rgba(20,0,34,0) 100%); }
-.social a { display: block; width: calc(30 * var(--u)); height: calc(30 * var(--u)); transition: opacity .2s; }
+.social a { display: block; width: calc(48 * var(--u)); height: calc(48 * var(--u)); padding: calc(10 * var(--u)); transition: opacity .2s; }
 .social a:hover { opacity: .6; }
 .social svg { width: 100%; height: 100%; }
 
-.chips { left: calc(1518 * var(--u)); top: calc(259 * var(--u)); z-index: 2; width: calc(300 * var(--u)); display: grid; gap: calc(30 * var(--u)); }
+/* Чипи за макетом Figma: група 293 × 266 (праворуч до 1820), чип 293 × 70, gap між чипами 28, padding 12/20/20/20, gap усередині 0,
+   радіус 16, заливка #FFFFFF 20%, ефект Glass (наближено), обводка 1px Inside з градієнтом Gradient_Line */
+.chips { left: calc(1527 * var(--u)); top: calc(258 * var(--u)); z-index: 2; width: calc(293 * var(--u)); display: grid; gap: calc(28 * var(--u)); }
 .chip {
-  display: flex; align-items: center; gap: calc(12 * var(--u)); height: calc(68 * var(--u)); padding: 0 calc(20 * var(--u));
-  border-radius: calc(16 * var(--u)); font-size: calc(24 * var(--u)); font-weight: 500; text-transform: uppercase; letter-spacing: 0; white-space: nowrap;
-  background: linear-gradient(180deg, rgba(255,255,255,.34), rgba(255,255,255,.2));
-  border: 1px solid rgba(255,255,255,.5);
-  box-shadow: 0 calc(8 * var(--u)) calc(20 * var(--u)) rgba(90, 60, 140, .08);
-  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  position: relative; display: flex; align-items: center; gap: 0; padding: calc(20 * var(--u)) calc(20 * var(--u)) calc(20 * var(--u)) calc(12 * var(--u));
+  border-radius: calc(16 * var(--u)); font-size: calc(24 * var(--u)); line-height: calc(30 * var(--u)); font-weight: 500; text-transform: uppercase; letter-spacing: 0; white-space: nowrap;
+  background: rgba(255, 255, 255, .2);
+  /* Glass: світло під кутом −45°, 50% */
+  box-shadow: inset 2px 2px 4px rgba(255, 255, 255, .5), inset -2px -2px 4px rgba(255, 255, 255, .15);
+  backdrop-filter: blur(10px) saturate(1.2); -webkit-backdrop-filter: blur(10px) saturate(1.2);
 }
-.chip::before { content: ""; width: calc(12 * var(--u)); height: calc(12 * var(--u)); border-radius: 50%; background: var(--c-accent); flex: none; }
+/* Крапка: 12 у блоці шириною 28 (крапка по центру) */
+.chip::before { content: ""; width: calc(12 * var(--u)); height: calc(12 * var(--u)); margin: 0 calc(8 * var(--u)); border-radius: 50%; background: var(--c-accent); flex: none; }
+/* Обводка 1px всередині з градієнтом: #140022 до 50%, далі зникає вправо */
+.chip::after {
+  content: ""; position: absolute; inset: 0; padding: 1px; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(90deg, #140022 0%, #140022 50%, rgba(20, 0, 34, 0) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
 
 /* ---------- Кейси ---------- */
 .cases {
@@ -256,7 +280,9 @@ h1, h2, h3, p { margin: 0; }
   .hero > * { position: static; }
   .hero__line { display: none; }
 
-  .hero__title { font-size: var(--t); line-height: 1.04; white-space: normal; }
+  .hero__title { display: block; width: auto; font-size: var(--t); line-height: 1.04; white-space: normal; }
+  .hero__title span { line-height: inherit; }
+  .hero__title span:nth-child(2) { margin-top: 0; }
   .hero__arrow { grid-area: title; justify-self: start; align-self: start; z-index: 2; width: var(--ta); height: var(--ta);
     margin: calc(var(--t) * .16 + (3.75 * var(--tf) - var(--ta)) / 2) 0 0 calc(var(--t) * 7.25 - var(--ta)); }
   .hero__lead { order: 3; width: auto; max-width: 560px; margin-top: 18px; font-size: clamp(16px, 2.3vw, 21px); line-height: 1.4; }
@@ -270,11 +296,11 @@ h1, h2, h3, p { margin: 0; }
 
   .hero__photo { width: min(100%, 700px); height: auto; aspect-ratio: 716 / 821; margin: 12px auto 0; justify-self: center; align-self: end; }
   .hero > .social { position: relative; left: auto; top: auto; width: auto; padding: 0 0 14px 40px; margin: 0 0 28px; gap: 22px; justify-content: flex-end; align-self: end; justify-self: end; }
-  .social a { width: 28px; height: 28px; }
+  .social a { width: 28px; height: 28px; padding: 0; }
 
   .chips { position: relative; left: auto; top: auto; z-index: 2; width: auto; display: flex; flex-direction: column; gap: 14px; margin: calc(32% + 64px) 0 0; justify-self: end; align-self: start; }
-  .chip { height: 50px; padding: 0 18px; border-radius: 14px; font-size: clamp(13px, 1.8vw, 16px); gap: 10px; }
-  .chip::before { width: 10px; height: 10px; }
+  .chip { height: 50px; padding: 0 18px; line-height: normal; border-radius: 14px; font-size: clamp(13px, 1.8vw, 16px); gap: 10px; }
+  .chip::before { width: 10px; height: 10px; margin: 0; }
 
   /* Кейси */
   .cases { margin: 0 var(--gutter); padding: clamp(14px, 3vw, 20px); border-radius: 20px; min-height: 0; }
